@@ -1,7 +1,13 @@
 var audio;
 function createAudioPlayer() {
-    audio = new Audio('http://sverigesradio.se/topsy/direkt/132.mp3');
+    audio = new Audio('');
     audio.loop="loop";
+}
+
+function setAudioUrl(url) {
+    if(audio !== undefined) {
+        audio.src = url;
+    }
 }
 
 function start(){
