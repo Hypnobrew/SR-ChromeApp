@@ -2,6 +2,8 @@
 
 $(document).ready(function(){
     var backgroundTask = chrome.extension.getBackgroundPage();
+    var shouldAutoplay = $("#autoplay");
+    shouldAutoplay.prop('checked', backgroundTask.getShouldAutoplay());
 
     backgroundTask.createAudioPlayer();
     backgroundTask.setAudioUrl('http://sverigesradio.se/topsy/direkt/132.mp3');
@@ -13,12 +15,13 @@ $(document).ready(function(){
     $("#stop_btn").click(function(){
         backgroundTask.stop();
     });
+
+    $('#autoplay').click(function() {
+        if(shouldAutoplay.is(':checked')) {
+            backgroundTask.setShouldAutoplay(true);
+        }
+        else {
+            backgroundTask.setShouldAutoplay(false);
+        }
+    });
 });
-
-/*
-document.addEventListener('DOMContentLoaded', function() {
-
-	var audio = document.getElementById('audio-player');
-	audio.src = 'http://sverigesradio.se/topsy/direkt/132.mp3';
-	
-});*/
