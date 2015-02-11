@@ -44,7 +44,7 @@ function startTimer() {
         if(getShouldAutoplay() === true && isPlaying() === false) {
             start();
         }
-    }, 3000);
+    }, 1000);
 }
 
 function stopTimer() {

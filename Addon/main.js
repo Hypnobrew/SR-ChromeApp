@@ -1,12 +1,14 @@
 //http://api.sr.se/api/v2/channels?liveaudiotemplateid=2&audioquality=hi
 
+//http://api.sr.se/api/v2/channels?liveaudiotemplateid=0&audioquality=hi
+
 $(document).ready(function(){
     var backgroundTask = chrome.extension.getBackgroundPage();
     var shouldAutoplay = $("#autoplay");
     shouldAutoplay.prop('checked', backgroundTask.getShouldAutoplay());
 
     backgroundTask.createAudioPlayer();
-    backgroundTask.setAudioUrl('http://sverigesradio.se/topsy/direkt/132.mp3');
+    backgroundTask.setAudioUrl('http://sverigesradio.se/topsy/direkt/164.mp3');
 
     $("#start_btn").click(function(){
         backgroundTask.start();
