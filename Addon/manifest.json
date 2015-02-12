@@ -19,5 +19,7 @@
     "matches": [ "http://*/*", "https://*/*"]
   }],
 
-  "permissions": []
+  "permissions": [
+    "http://api.sr.se/api/v2/channels"
+  ]
 }
