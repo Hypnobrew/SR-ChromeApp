@@ -8,9 +8,9 @@ $(document).ready(function(){
     shouldAutoplay.prop('checked', backgroundTask.getShouldAutoplay());
 
     backgroundTask.createAudioPlayer();
-    backgroundTask.setAudioUrl('http://sverigesradio.se/topsy/direkt/164.mp3');
 
     $("#start_btn").click(function(){
+        backgroundTask.setAudioUrl('http://sverigesradio.se/topsy/direkt/164.mp3');
         backgroundTask.start();
     });
 

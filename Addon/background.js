@@ -1,10 +1,13 @@
 var audio;
 var autoplay = false;
+var userStoppedAudio = false;
 var timer;
 
 function createAudioPlayer() {
-    audio = new Audio('');
-    audio.loop="loop";
+    if(audio === undefined) {
+        audio = new Audio('');
+        audio.loop="loop";
+    }
 }
 
 function setAudioUrl(url) {
@@ -15,6 +18,7 @@ function setAudioUrl(url) {
 
 function start() {
     if(audio !== undefined) {
+        userStoppedAudio = false;
         audio.play();
         startTimer();
     }
@@ -22,6 +26,7 @@ function start() {
 
 function stop() {
     if(audio !== undefined) {
+        userStoppedAudio = true;
         audio.pause();
         stopTimer();
     }
