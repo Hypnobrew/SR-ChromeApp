@@ -32,7 +32,7 @@ $(document).ready(function(){
 
     function fetchChannels() {
         $.ajax({
-            url: "http://api.sr.se/api/v2/channels?liveaudiotemplateid=2&audioquality=hi&format=json",
+            url: "http://api.sr.se/api/v2/channels?liveaudiotemplateid=2&audioquality=hi&format=json"
         }).done(function (data) {
             handleData(data.channels);
         });
