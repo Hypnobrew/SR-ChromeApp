@@ -1,0 +1,92 @@
+.part {
+    position: relative;
+    float: left;
+    width: 10%;
+    height: 100%;
+    background-color: #000000;
+}
+
+.part .glyphicon, .bigpart span {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    transform: translate(0, -50%);
+    color: white;
+}
+
+.channelDropdown {
+    position: absolute;
+    top: 50px;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    padding: 0;
+    width: 130px;
+}
+
+.volumePart {
+    width: 30%;
+    color: white;
+}
+
+.volumePart span.glyphicon {
+    color: white;
+    left: 0;
+}
+
+.infoPart img {
+    width: 50px;
+    height: 50px;
+}
+
+.channelPart ul {
+    list-style-type: none;
+}
+
+.channelPart li:hover {
+    background-color: lightgrey;
+}
+
+.channelPart li img {
+    width: 32px;
+}
+
+.channelPart li span {
+    padding-left: 5px;
+}
+
+.part:not(.volumePart):hover {
+    cursor: pointer;
+}
+
+.bigpart {
+    position: relative;
+    float: left;
+    width: 40%;
+    height: 100%;
+    background-color: #000000;
+}
+
+.radioBox {
+    width: 500px;
+    height: 50px;
+}
+
+.slider-container {
+    position: absolute;
+    background-color: #000000;
+    top: 20px;
+    width: 100px;
+    height: 50px;
+}
+
+input[type=range] {
+    display: inline;
+    width: 100px;
+    margin-left: 5px;
+}
+
+.hidden {
+    display: none;
+}

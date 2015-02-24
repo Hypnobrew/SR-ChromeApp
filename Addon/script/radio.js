@@ -6,18 +6,18 @@ var RadioBox = React.createClass({
         playing: false,
         volume: 50,
         resume: false,
-        selectedChannel: 0,
+        selectedChannel: 132,
         channels: [
           {
-            id: 0,
+            id: 132,
             name: "P1",
-            url: "https://www.google.se",
+            url: "http://sverigesradio.se/topsy/direkt/132.mp3",
             img: "http://sverigesradio.se/sida/images/132/2186745_512_512.jpg"
           },
           {
-            id: 1,
+            id: 163,
             name: "P2",
-            url: "https://www.google.se",
+            url: "http://sverigesradio.se/topsy/direkt/163.mp3",
             img: "http://sverigesradio.se/sida/images/163/2186754_512_512.jpg"
           }
         ]
@@ -72,12 +72,9 @@ var PlayPart = React.createClass({
 });
 
 var InfoPart = React.createClass({
-  getInitialState: function() {
-    return {selectedChannel: 0};
-  },
   render: function() {
     var selected = this.props.selectedChannel;
-    var channel = this.props.channels[selected];
+    var channel = findElement(this.props.channels, 'id', selected);
 
     return (
       <div className="infoPart bigpart">
@@ -87,6 +84,12 @@ var InfoPart = React.createClass({
     );
   }
 });
+
+function findElement(array, name, value) {
+  for (var i=0; i < array.length; i++)
+    if (array[i][name] == value)
+      return array[i];
+}
 
 var ChannelListPart = React.createClass({
   getInitialState: function() {

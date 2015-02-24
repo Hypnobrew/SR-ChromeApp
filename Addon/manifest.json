@@ -5,9 +5,11 @@
   "description": "A widget for playing live channels from Sverige Radio",
   "version": "0.1",
 
+  /*"content_security_policy": "script-src 'self' 'unsafe-eval';",*/
+
   "browser_action": {
-    "default_icon": "icon.png",
-    "default_popup": "main.html"
+    "default_icon": "style/icon.png",
+    "default_popup": "index.html"
   },
 	
   "background": {
@@ -15,7 +17,7 @@
   },
 
   "content_scripts": [ {
-    "js": [ "jquery-2.1.3.min.js", "background.js", "main.js" ],
+    "js": [ "script/react-0.12.2.js", "script/jquery-2.1.3.min.js", "script/bootstrap.min.js", "script/background.js", "script/main.js" ],
     "matches": [ "http://*/*", "https://*/*"]
   }],
 
