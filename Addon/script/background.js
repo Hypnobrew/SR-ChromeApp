@@ -2,11 +2,43 @@ var audio;
 var autoplay = false;
 var userStoppedAudio = false;
 var timer;
+var volume = 0.5;
+var fetchedChannels;
+var selectedChannel = 0;
+
+function getState() {
+    createAudioPlayer();
+
+    return {
+        playing: isPlaying(),
+        volume: getVolume(),
+        resume: getShouldAutoplay(),
+        selectedChannel: 132,
+        channels: fetchedChannels
+    };
+}
 
 function createAudioPlayer() {
     if(audio === undefined) {
         audio = new Audio('');
         audio.loop="loop";
+
+        $.ajax({
+            url: "http://api.sr.se/api/v2/channels?liveaudiotemplateid=2&audioquality=hi&format=json"
+        }).done(function (data) {
+            var parsedChannels = [];
+            $.each(data, function(i, item) {
+                parsedChannels.push({
+                    id : item.id,
+                    name : item.name,
+                    img : item.image,
+                    url: item.liveaudio.url
+                });
+                //channels.append(new Option(item.name, item.liveaudio.url));
+            });
+            fetchedChannels = parsedChannels;
+            selectedChannel = parsedChannels[0].id;
+        });
     }
 }
 
@@ -30,6 +62,16 @@ function stop() {
         audio.pause();
         stopTimer();
     }
+}
+
+function setVolume(volume) {
+    if(audio !== undefined) {
+        audio.volume = parseFloat(volume / 100);
+    }
+}
+
+function getVolume() {
+    return volume * 100;
 }
 
 function isPlaying() {

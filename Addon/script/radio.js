@@ -24,6 +24,8 @@ var RadioBox = React.createClass({
       };
     },
     componentDidMount: function() {
+        var backgroundTask = chrome.extension.getBackgroundPage();
+
 
     },
     handlePlayChange: function(playing) {
