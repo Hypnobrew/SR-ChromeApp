@@ -13,7 +13,7 @@ function getState() {
         playing: isPlaying(),
         volume: getVolume(),
         resume: getShouldAutoplay(),
-        selectedChannel: 132,
+        selectedChannel: selectedChannel,
         channels: fetchedChannels
     };
 }
@@ -38,8 +38,20 @@ function createAudioPlayer() {
             });
             fetchedChannels = parsedChannels;
             selectedChannel = parsedChannels[0].id;
+            setChannel(parsedChannels[0].url);
         });
     }
+}
+
+function setChannel(channel) {
+    var channelData = findElement(fetchedChannels, 'id', channel);
+    setAudioUrl(channelData.url);
+}
+
+function findElement(array, name, value) {
+    for (var i=0; i < array.length; i++)
+        if (array[i][name] == value)
+            return array[i];
 }
 
 function setAudioUrl(url) {

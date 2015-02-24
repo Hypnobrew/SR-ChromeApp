@@ -1,45 +1,30 @@
+var backgroundTask;
 var RadioBox = React.createClass({
     getInitialState: function() {
-      console.log('init');
-
-      return {
-        playing: false,
-        volume: 50,
-        resume: false,
-        selectedChannel: 132,
-        channels: [
-          {
-            id: 132,
-            name: "P1",
-            url: "http://sverigesradio.se/topsy/direkt/132.mp3",
-            img: "http://sverigesradio.se/sida/images/132/2186745_512_512.jpg"
-          },
-          {
-            id: 163,
-            name: "P2",
-            url: "http://sverigesradio.se/topsy/direkt/163.mp3",
-            img: "http://sverigesradio.se/sida/images/163/2186754_512_512.jpg"
-          }
-        ]
-      };
+        backgroundTask = chrome.extension.getBackgroundPage();
+        return backgroundTask.getState();
     },
     componentDidMount: function() {
-        var backgroundTask = chrome.extension.getBackgroundPage();
-
-
+        //var backgroundTask = chrome.extension.getBackgroundPage();
     },
     handlePlayChange: function(playing) {
-
+        if(playing) {
+            backgroundTask.play();
+        }
+        else {
+            backgroundTask.stop();
+        }
     },
     handleVolumeChange: function(volume) {
-
+        backgroundTask.setVolume(volume);
     },
     handleResumeChange: function(resume) {
-
+        backgroundTask.setShouldAutoplay(resume);
     },
     handleChannelChange: function(channelNumber) {
-      this.setState({selectedChannel: channelNumber});
-      console.log(channelNumber);
+        backgroundTask.setChannel(channelNumber);
+        this.setState({selectedChannel: channelNumber});
+        console.log(channelNumber);
     },
     render: function() {
         return (
