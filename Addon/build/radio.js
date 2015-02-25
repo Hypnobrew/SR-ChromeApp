@@ -1,11 +1,17 @@
 var backgroundTask;
-var RadioBox = React.createClass({
+var RadioBox = React.createClass({displayName: "RadioBox",
     getInitialState: function() {
-        backgroundTask = chrome.extension.getBackgroundPage();
-        return backgroundTask.getState();
+        return {
+            playing: false,
+            volume: 50,
+            resume: false,
+            selectedChannel: 0,
+            channels: []
+        };
     },
     componentDidMount: function() {
-        //var backgroundTask = chrome.extension.getBackgroundPage();
+        backgroundTask = chrome.extension.getBackgroundPage();
+        return backgroundTask.getState();
     },
     handlePlayChange: function(playing) {
         if(playing) {
@@ -28,18 +34,18 @@ var RadioBox = React.createClass({
     },
     render: function() {
         return (
-            <div className="radioBox">
-                <PlayPart playing={this.state.playing} onPlayChange={this.handlePlayChange} />
-                <InfoPart selectedChannel={this.state.selectedChannel} channels={this.state.channels}/>
-                <ChannelListPart channels={this.state.channels} onChannelChange={this.handleChannelChange}/>
-                <VolumePart volume={this.state.volume} onVolumeChange={this.handleVolumeChange} />
-                <SettingsPart resume={this.state.resume} onResumeChange={this.handleResumeChange} />
-            </div>
+            React.createElement("div", {className: "radioBox"}, 
+                React.createElement(PlayPart, {playing: this.state.playing, onPlayChange: this.handlePlayChange}), 
+                React.createElement(InfoPart, {selectedChannel: this.state.selectedChannel, channels: this.state.channels}), 
+                React.createElement(ChannelListPart, {channels: this.state.channels, onChannelChange: this.handleChannelChange}), 
+                React.createElement(VolumePart, {volume: this.state.volume, onVolumeChange: this.handleVolumeChange}), 
+                React.createElement(SettingsPart, {resume: this.state.resume, onResumeChange: this.handleResumeChange})
+            )
         );
     }
 });
 
-var PlayPart = React.createClass({
+var PlayPart = React.createClass({displayName: "PlayPart",
   getInitialState: function() {
     return {playing: this.props.playing};
   },
@@ -51,23 +57,23 @@ var PlayPart = React.createClass({
   render: function() {
     var playIcon = this.state.playing ? 'glyphicon glyphicon-stop' : 'glyphicon glyphicon-play';
     return (
-      <div className="playPart part" onClick={this.handleClick}>
-          <span className={playIcon}></span>
-      </div>
+      React.createElement("div", {className: "playPart part", onClick: this.handleClick}, 
+          React.createElement("span", {className: playIcon})
+      )
     );
   }
 });
 
-var InfoPart = React.createClass({
+var InfoPart = React.createClass({displayName: "InfoPart",
   render: function() {
     var selected = this.props.selectedChannel;
     var channel = findElement(this.props.channels, 'id', selected);
 
     return (
-      <div className="infoPart bigpart">
-        <img src={channel.img}/>
-        <span>{channel.name}</span>
-      </div>
+      React.createElement("div", {className: "infoPart bigpart"}, 
+        React.createElement("img", {src: channel.img}), 
+        React.createElement("span", null, channel.name)
+      )
     );
   }
 });
@@ -78,7 +84,7 @@ function findElement(array, name, value) {
       return array[i];
 }
 
-var ChannelListPart = React.createClass({
+var ChannelListPart = React.createClass({displayName: "ChannelListPart",
   getInitialState: function() {
     return {showing: false};
   },
@@ -94,36 +100,36 @@ var ChannelListPart = React.createClass({
     var channelClass = this.state.showing ? 'channelDropdown' : 'channelDropdown hidden';
     var channelNodes = this.props.channels.map(function (channel) {
       return (
-        <ChannelPart url={channel.url} number={channel.id} key={channel.id} itemSelected={that.handleItemClick} name={channel.name} img={channel.img}/>
+        React.createElement(ChannelPart, {url: channel.url, number: channel.id, key: channel.id, itemSelected: that.handleItemClick, name: channel.name, img: channel.img})
       );
     });
 
     return (
-      <div className="channelPart part">
-        <span className="glyphicon glyphicon-list" onClick={this.handleClick}></span>
-        <ul className={channelClass}>
-            {channelNodes}
-        </ul>
-      </div>
+      React.createElement("div", {className: "channelPart part"}, 
+        React.createElement("span", {className: "glyphicon glyphicon-list", onClick: this.handleClick}), 
+        React.createElement("ul", {className: channelClass}, 
+            channelNodes
+        )
+      )
     );
   }
 });
 
-var ChannelPart = React.createClass({
+var ChannelPart = React.createClass({displayName: "ChannelPart",
   onClick: function(event) {
     this.props.itemSelected(this.props.number);
   },
   render: function() {
     return (
-      <li url={this.props.url} key={this.props.key} number={this.props.number} onClick={this.onClick}>
-        <img src={this.props.img}/>
-        {this.props.name}
-      </li>
+      React.createElement("li", {url: this.props.url, key: this.props.key, number: this.props.number, onClick: this.onClick}, 
+        React.createElement("img", {src: this.props.img}), 
+        this.props.name
+      )
     );
   }
 });
 
-var VolumePart = React.createClass({
+var VolumePart = React.createClass({displayName: "VolumePart",
   getInitialState: function() {
     return {volume: this.props.volume};
   },
@@ -145,16 +151,16 @@ var VolumePart = React.createClass({
     }
 
     return (
-      <div className="volumePart part">
-        <span className={volumeClass}>
-          <input className="slider" type="range" min="0" max="100" step="1" onChange={this.handleChange}/>
-        </span>
-      </div>
+      React.createElement("div", {className: "volumePart part"}, 
+        React.createElement("span", {className: volumeClass}, 
+          React.createElement("input", {className: "slider", type: "range", min: "0", max: "100", step: "1", onChange: this.handleChange})
+        )
+      )
     );
   }
 });
 
-var SettingsPart = React.createClass({
+var SettingsPart = React.createClass({displayName: "SettingsPart",
   getInitialState : function() {
     return {resume: this.props.resume};
   },
@@ -165,13 +171,13 @@ var SettingsPart = React.createClass({
   render: function() {
     var resumeClass = this.state.resume ? 'glyphicon glyphicon-ban-circle' : 'glyphicon glyphicon-repeat';
     return (
-      <div className="settingsPart part" onClick={this.handleClick}>
-        <span className={resumeClass}></span>
-      </div>
+      React.createElement("div", {className: "settingsPart part", onClick: this.handleClick}, 
+        React.createElement("span", {className: resumeClass})
+      )
     );
   }
 });
 
 React.render(
-    <RadioBox />, document.getElementById('content')
+    React.createElement(RadioBox, null), document.getElementById('content')
 );

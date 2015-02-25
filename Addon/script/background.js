@@ -28,6 +28,8 @@ function createAudioPlayer() {
         }).done(function (data) {
             var parsedChannels = [];
             $.each(data, function(i, item) {
+                console.log('data fetched');
+
                 parsedChannels.push({
                     id : item.id,
                     name : item.name,

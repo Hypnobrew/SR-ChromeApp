@@ -1,44 +1,36 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+var backgroundTask;
 var RadioBox = React.createClass({displayName: "RadioBox",
     getInitialState: function() {
-      console.log('init');
-
-      return {
-        playing: false,
-        volume: 50,
-        resume: false,
-        selectedChannel: 132,
-        channels: [
-          {
-            id: 132,
-            name: "P1",
-            url: "http://sverigesradio.se/topsy/direkt/132.mp3",
-            img: "http://sverigesradio.se/sida/images/132/2186745_512_512.jpg"
-          },
-          {
-            id: 163,
-            name: "P2",
-            url: "http://sverigesradio.se/topsy/direkt/163.mp3",
-            img: "http://sverigesradio.se/sida/images/163/2186754_512_512.jpg"
-          }
-        ]
-      };
+        return {
+            playing: false,
+            volume: 50,
+            resume: false,
+            selectedChannel: 0,
+            channels: []
+        };
     },
     componentDidMount: function() {
-
+        backgroundTask = chrome.extension.getBackgroundPage();
+        return backgroundTask.getState();
     },
     handlePlayChange: function(playing) {
-
+        if(playing) {
+            backgroundTask.play();
+        }
+        else {
+            backgroundTask.stop();
+        }
     },
     handleVolumeChange: function(volume) {
-
+        backgroundTask.setVolume(volume);
     },
     handleResumeChange: function(resume) {
-
+        backgroundTask.setShouldAutoplay(resume);
     },
     handleChannelChange: function(channelNumber) {
-      this.setState({selectedChannel: channelNumber});
-      console.log(channelNumber);
+        backgroundTask.setChannel(channelNumber);
+        this.setState({selectedChannel: channelNumber});
+        console.log(channelNumber);
     },
     render: function() {
         return (
@@ -189,6 +181,3 @@ var SettingsPart = React.createClass({displayName: "SettingsPart",
 React.render(
     React.createElement(RadioBox, null), document.getElementById('content')
 );
-
-
-},{}]},{},[1]);
