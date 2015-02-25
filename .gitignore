@@ -49,3 +49,5 @@ crashlytics-build.properties
 DS_Store
 workspace.xml
 npm-debug.log
+
+Addon/build/.module-cache

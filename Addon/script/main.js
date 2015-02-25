@@ -7,8 +7,6 @@ $(document).ready(function(){
     var shouldAutoplay = $("#autoplay");
     shouldAutoplay.prop('checked', backgroundTask.getShouldAutoplay());
 
-    backgroundTask.createAudioPlayer();
-
     fetchChannels();
 
     $("#start_btn").click(function(){
@@ -31,11 +29,12 @@ $(document).ready(function(){
     });
 
     function fetchChannels() {
-        $.ajax({
-            url: "http://api.sr.se/api/v2/channels?liveaudiotemplateid=2&audioquality=hi&format=json"
-        }).done(function (data) {
+        var httpPromise = backgroundTask.getState();
+        httpPromise.done(function (data) {
+            console.log(JSON.stringify(data));
             handleData(data.channels);
         });
+
     }
 
     function handleData(data) {

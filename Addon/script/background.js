@@ -2,13 +2,16 @@ var audio;
 var autoplay = false;
 var userStoppedAudio = false;
 var timer;
-var volume = 0.5;
+var volume = 50;
 var fetchedChannels;
 var selectedChannel = 0;
 
-function getState() {
+$(document).ready(function(){
     createAudioPlayer();
+    fetchData();
+});
 
+function getState() {
     return {
         playing: isPlaying(),
         volume: getVolume(),
@@ -22,27 +25,28 @@ function createAudioPlayer() {
     if(audio === undefined) {
         audio = new Audio('');
         audio.loop="loop";
-
-        $.ajax({
-            url: "http://api.sr.se/api/v2/channels?liveaudiotemplateid=2&audioquality=hi&format=json"
-        }).done(function (data) {
-            var parsedChannels = [];
-            $.each(data, function(i, item) {
-                console.log('data fetched');
-
-                parsedChannels.push({
-                    id : item.id,
-                    name : item.name,
-                    img : item.image,
-                    url: item.liveaudio.url
-                });
-                //channels.append(new Option(item.name, item.liveaudio.url));
-            });
-            fetchedChannels = parsedChannels;
-            selectedChannel = parsedChannels[0].id;
-            setChannel(parsedChannels[0].url);
-        });
     }
+}
+
+function fetchData() {
+    $.ajax({
+        url: "http://api.sr.se/api/v2/channels?liveaudiotemplateid=2&audioquality=hi&format=json"
+    }).done(function (data) {
+        var parsedChannels = [];
+        $.each(data.channels, function(i, item) {
+            console.log('data fetched');
+
+            parsedChannels.push({
+                id : item.id,
+                name : item.name,
+                img : item.image,
+                url: item.liveaudio.url
+            });
+        });
+        fetchedChannels = parsedChannels;
+        selectedChannel = parsedChannels[0].id;
+        setChannel(selectedChannel);
+    });
 }
 
 function setChannel(channel) {
@@ -80,7 +84,7 @@ function stop() {
 
 function setVolume(volume) {
     if(audio !== undefined) {
-        audio.volume = parseFloat(volume / 100);
+        //audio.volume = parseFloat(volume / 100);
     }
 }
 

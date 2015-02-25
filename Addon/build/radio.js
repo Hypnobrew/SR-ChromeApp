@@ -1,21 +1,29 @@
-var backgroundTask;
 var RadioBox = React.createClass({displayName: "RadioBox",
     getInitialState: function() {
-        return {
+        var backgroundTask = chrome.extension.getBackgroundPage();
+        var state = backgroundTask.getState();
+
+        console.log(JSON.stringify(state));
+
+        return state;
+
+        /*return {
             playing: false,
             volume: 50,
             resume: false,
             selectedChannel: 0,
             channels: []
-        };
+        };*/
     },
     componentDidMount: function() {
-        backgroundTask = chrome.extension.getBackgroundPage();
-        return backgroundTask.getState();
+        /*backgroundTask = chrome.extension.getBackgroundPage();
+        return backgroundTask.getState();*/
     },
     handlePlayChange: function(playing) {
+        var backgroundTask = chrome.extension.getBackgroundPage();
+        console.log(backgroundTask);
         if(playing) {
-            backgroundTask.play();
+            backgroundTask.start();
         }
         else {
             backgroundTask.stop();

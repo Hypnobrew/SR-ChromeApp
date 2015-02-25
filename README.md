@@ -4,3 +4,5 @@ http://facebook.github.io/react/docs/getting-started.html
 
 npm install -g browserify reactify
 browserify -t rectify source > target
+
+http://facebook.github.io/react/docs/tooling-integration.html
