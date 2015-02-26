@@ -2,7 +2,7 @@ var audio;
 var autoplay = false;
 var userStoppedAudio = false;
 var timer;
-var volume = 50;
+var savedVolume = 0.5;
 var fetchedChannels;
 var selectedChannel = 0;
 
@@ -52,6 +52,7 @@ function fetchData() {
 function setChannel(channel) {
     var channelData = findElement(fetchedChannels, 'id', channel);
     setAudioUrl(channelData.url);
+    selectedChannel = channel;
 }
 
 function findElement(array, name, value) {
@@ -84,12 +85,13 @@ function stop() {
 
 function setVolume(volume) {
     if(audio !== undefined) {
-        //audio.volume = parseFloat(volume / 100);
+        audio.volume = parseFloat(volume / 100);
+        savedVolume = parseFloat(volume / 100);
     }
 }
 
 function getVolume() {
-    return volume * 100;
+    return savedVolume * 100;
 }
 
 function isPlaying() {

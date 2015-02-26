@@ -1,9 +1,10 @@
+var backgroundTask;
 var RadioBox = React.createClass({
     getInitialState: function() {
-        var backgroundTask = chrome.extension.getBackgroundPage();
+        backgroundTask = chrome.extension.getBackgroundPage();
         var state = backgroundTask.getState();
 
-        console.log(JSON.stringify(state));
+        console.log('volym: ' + JSON.stringify(state.volume));
 
         return state;
 
@@ -20,8 +21,6 @@ var RadioBox = React.createClass({
         return backgroundTask.getState();*/
     },
     handlePlayChange: function(playing) {
-        var backgroundTask = chrome.extension.getBackgroundPage();
-        console.log(backgroundTask);
         if(playing) {
             backgroundTask.start();
         }
@@ -161,7 +160,7 @@ var VolumePart = React.createClass({
     return (
       <div className="volumePart part">
         <span className={volumeClass}>
-          <input className="slider" type="range" min="0" max="100" step="1" onChange={this.handleChange}/>
+          <input value={value} className="slider" type="range" min="0" max="100" step="1" onChange={this.handleChange}/>
         </span>
       </div>
     );
