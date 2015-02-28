@@ -3,22 +3,10 @@ var RadioBox = React.createClass({
     getInitialState: function() {
         backgroundTask = chrome.extension.getBackgroundPage();
         var state = backgroundTask.getState();
-
-        console.log('volym: ' + JSON.stringify(state.volume));
-
         return state;
-
-        /*return {
-            playing: false,
-            volume: 50,
-            resume: false,
-            selectedChannel: 0,
-            channels: []
-        };*/
     },
     componentDidMount: function() {
-        /*backgroundTask = chrome.extension.getBackgroundPage();
-        return backgroundTask.getState();*/
+
     },
     handlePlayChange: function(playing) {
         if(playing) {
@@ -38,7 +26,6 @@ var RadioBox = React.createClass({
         backgroundTask.setChannel(channelNumber);
         backgroundTask.start();
         this.setState({selectedChannel: channelNumber});
-        console.log(channelNumber);
     },
     render: function() {
         return (

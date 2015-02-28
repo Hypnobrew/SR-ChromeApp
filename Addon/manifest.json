@@ -11,9 +11,9 @@
     "default_icon": "style/icon.png",
     "default_popup": "index.html"
   },
-	
+  
   "background": {
-    "page": "background.html"
+    "page": "srbackground.html"
   },
 
   "content_scripts": [ {
