@@ -36,6 +36,7 @@ var RadioBox = React.createClass({displayName: "RadioBox",
     },
     handleChannelChange: function(channelNumber) {
         backgroundTask.setChannel(channelNumber);
+        backgroundTask.start();
         this.setState({selectedChannel: channelNumber});
         console.log(channelNumber);
     },
