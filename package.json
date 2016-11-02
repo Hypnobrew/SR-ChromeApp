@@ -1,0 +1,24 @@
+{
+  "name": "sr.chrome",
+  "version": "1.0.0",
+  "description": "Chrome extension to play live radio from Sveriges Radio (Swedish Radio).** Is built with React.js.",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-plugin-transform-react-jsx": "^6.8.0"
+  },
+  "scripts": {
+    "transform": "babel --plugins transform-react-jsx Addon/JSX/radio.js --out-file Addon/Build/radio.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Merryweather/SR-ChromeApp.git"
+  },
+  "author": "Cristoffer Andersson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Merryweather/SR-ChromeApp/issues"
+  },
+  "homepage": "https://github.com/Merryweather/SR-ChromeApp#readme"
+}
