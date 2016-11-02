@@ -5,8 +5,6 @@
   "description": "A widget for playing live channels from Sverige Radio",
   "version": "0.1",
 
-  /*"content_security_policy": "script-src 'self' 'unsafe-eval';",*/
-
   "browser_action": {
     "default_icon": "style/icon.png",
     "default_popup": "index.html"
