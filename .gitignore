@@ -50,4 +50,7 @@ DS_Store
 workspace.xml
 npm-debug.log
 
-Addon/build/.module-cache
+src/build/.module-cache
+src/build/*
+Target/*
+node_modules
