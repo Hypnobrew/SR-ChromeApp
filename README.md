@@ -1,5 +1,8 @@
 # SR ChromeApp 
 **Chrome extension to play live radio from Sveriges Radio (Swedish Radio).**
+
+[Chrome Web Store link](https://chrome.google.com/webstore/detail/srse-widget/aepaddjgdloihbpncgneoaponbfglihk)
+
 Is built with React.js.
 
 To transform the react JSX to plain javascript, supported by Chrome plugins, we use babel.js with babel-plugin-transform-react-jsx.
