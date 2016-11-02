@@ -8,7 +8,7 @@
     "babel-plugin-transform-react-jsx": "^6.8.0"
   },
   "scripts": {
-    "transform": "babel --plugins transform-react-jsx Addon/JSX/radio.jsx --out-file Addon/Build/radio.js",
+    "transform": "babel --plugins transform-react-jsx src/JSX/radio.jsx --out-file src/Build/radio.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
