@@ -1,6 +1,8 @@
 # SR ChromeApp 
 **Chrome extension to play live radio from Sveriges Radio (Swedish Radio).**
 
+![Sr-ChromeApp](https://raw.githubusercontent.com/Hypnobrew/SR-ChromeApp/master/src/style/clip.gif)
+
 [Chrome Web Store link](https://chrome.google.com/webstore/detail/srse-widget/aepaddjgdloihbpncgneoaponbfglihk)
 
 Is built with React.js.
