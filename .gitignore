@@ -51,3 +51,6 @@ workspace.xml
 npm-debug.log
 
 Addon/build/.module-cache
+Addon/build/*
+Target/*
+node_modules
